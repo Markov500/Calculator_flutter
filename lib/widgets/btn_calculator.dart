@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 class CalculatorBtn extends StatelessWidget {
   final String value;
   final addUserInput;
-  final String userInputText;
+
   const CalculatorBtn(
-      {super.key,
-      required this.value,
-      required this.addUserInput,
-      required this.userInputText});
+      {super.key, required this.value, required this.addUserInput});
 
   getColor(String text) {
     if (text == "/" ||
@@ -25,13 +22,14 @@ class CalculatorBtn extends StatelessWidget {
   }
 
   getBgColor(String text) {
-    if (text == "AC") {
-      return const Color.fromARGB(255, 252, 100, 100);
+    switch (text) {
+      case "AC":
+        return const Color.fromARGB(255, 252, 100, 100);
+      case "=":
+        return const Color.fromARGB(153, 100, 252, 100);
+      default:
+        return const Color(0xFF1d2630);
     }
-    if (text == "=") {
-      return Color.fromARGB(153, 100, 252, 100);
-    }
-    return const Color(0xFF1d2630);
   }
 
   @override

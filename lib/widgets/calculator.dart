@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/widgets/btn_calculator.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
@@ -34,10 +35,43 @@ class _CalculatorState extends State<Calculator> {
     "=",
   ];
 
+  String calculate() {
+    try {
+      var exp = Parser().parse(userInput);
+      var evaluation = exp.evaluate(EvaluationType.REAL, ContextModel());
+      return evaluation.toString();
+    } on Exception catch (e) {
+      return e.toString();
+    }
+  }
+
   void handelUserInput(String value) {
-    setState(() {
-      userInput += value;
-    });
+    switch (value) {
+      case "AC":
+        setState(() {
+          userInput = "";
+          result = "0";
+        });
+        break;
+      case "C":
+        setState(() {
+          userInput = userInput.substring(0, userInput.length - 1);
+        });
+        break;
+      case "=":
+        setState(() {
+          result = calculate();
+        });
+        break;
+      default:
+        setState(() {
+          userInput += value;
+        });
+        break;
+    }
+    if (value == "AC") {
+    } else if (value == "C") {
+    } else {}
   }
 
   @override
@@ -89,7 +123,6 @@ class _CalculatorState extends State<Calculator> {
                 return CalculatorBtn(
                   value: listButton[index],
                   addUserInput: handelUserInput,
-                  userInputText: userInput,
                 );
               },
             ),
