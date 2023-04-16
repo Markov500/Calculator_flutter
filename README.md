@@ -1,6 +1,5 @@
 # flutter_calculator
  
  This app is a simple calulator buid in flutter.
-![SPACE INVENDER](screenshot.png)
 
-jhjhjj
+<img src="screenshot.png" width="300" height="600">
